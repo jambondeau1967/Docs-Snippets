@@ -1,4 +1,4 @@
-*** update an ubuntu server:
+### update an ubuntu server:
 
 ```
 sudo -s -- <<EOF
