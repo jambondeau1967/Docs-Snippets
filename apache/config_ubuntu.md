@@ -56,3 +56,16 @@ import sys
 sys.path.insert(0, "/var/www/firstapp")
 from hello import app as application
 ```
+
+apache commands to disable/enable sites:
+(resident in sites-available folder)
+```
+sudo a2dissite 000-default.conf
+sudo enable a2ensite hello.conf
+sudo service apache2 reload
+```
+inspect apache2 log:
+```
+sudo tail -f /var/log/apache2/error.log
+```
+
