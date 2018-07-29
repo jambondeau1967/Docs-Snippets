@@ -1,0 +1,39 @@
+- turn off vmguest
+
+properties vmguest, do:
+- add network adapter
+- generate MAC address --> for configuring DHCP
+
+info:
+VMware Fusion use vmnet1 for “host-only” networking 
+and use vmnet8 for NAT/shared connections:
+mac$ ifconfig vmnet1
+
+vmnet1: flags=8863<UP,BROADCAST,SMART,RUNNING,MULTICAST> mtu 1500
+ ether 00:50:56:c0:00:01 
+ inet 192.168.7.1 netmask 0xffffff00 broadcast 192.168.7.255
+
+mac$ ifconfig vmnet8
+vmnet8: flags=8863<UP,BROADCAST,SMART,RUNNING,MULTICAST> mtu 1500
+ ether 00:50:56:c0:00:08 
+ inet 172.16.163.1 netmask 0xffffff00 broadcast 172.16.163.255
+
+
+mac$ grep range /Library/Preferences/VMware\ Fusion/vmnet1/dhcpd.conf
+    range 172.16.222.128 172.16.222.254;
+    (or list using Code (Microsoft's editor))
+this instructs the DHCP server to hand out IP addresses between 172.16.222.128–254 to guests
+so choose another not in that range, for example 172.16.222.100
+do not change the default!
+do not choose ip-address 1, which is reserved for vmnet1
+
+reconfigure the DHCP server VMware:
+mac$ sudo /Applications/VMware\ Fusion.app/Contents/Library/vmnet-cli --configure
+stop server:
+mac$ sudo /Applications/VMware\ Fusion.app/Contents/Library/vmnet-cli --stop
+start server:
+mac$ sudo /Applications/VMware\ Fusion.app/Contents/Library/vmnet-cli --start
+
+boot vmguest and verify configuration:
+linux$ ifconfig|grep -B 1 172.16.222.100
+mac$ /sbin/ping 192.168.222.100
