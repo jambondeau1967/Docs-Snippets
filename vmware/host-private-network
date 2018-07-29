@@ -23,7 +23,7 @@ mac$ grep range /Library/Preferences/VMware\ Fusion/vmnet1/dhcpd.conf
     range 172.16.222.128 172.16.222.254;
     (or list using Code (Microsoft's editor))
 this instructs the DHCP server to hand out IP addresses between 172.16.222.128–254 to guests
-so choose another not in that range, for example 172.168.222.100
+so choose another not in that range, for example 172.16.222.100
 do not change the default!
 do not choose ip-address 1, which is reserved for vmnet1
 
@@ -35,5 +35,5 @@ start server:
 mac$ sudo /Applications/VMware\ Fusion.app/Contents/Library/vmnet-cli --start
 
 boot vmguest and verify configuration:
-linux$ ifconfig|grep -B 1 172.168.222.100
-mac$ /sbin/ping 192.168.222.100
+linux$ ifconfig|grep -B 1 172.16.222.100
+mac$ /sbin/ping 172.16.222.100
