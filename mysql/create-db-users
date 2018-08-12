@@ -1,0 +1,21 @@
++++++
+source:
+https://www.digitalocean.com/community/tutorials/how-to-set-up-a-remote-database-to-optimize-site-performance-with-mysql-on-ubuntu-16-04
++++++
+
++++++
+$mysql -u root -p
+prompt pw
+mysql>CREATE DATABASE dbname;
+
++++++
+mysql>CREATE USER 'username'@'localhost' IDENTIFIED BY 'password';
+mysql>GRANT ALL PRIVILEGES ON dbname.* TO 'username'@'localhost';
+mysql>GRANT ALL PRIVILEGES ON dbname.* TO 'remoteuser'@'remote_server_ip';
++++ write priviliges to disk and start using them:
+mysql>FLUSH PRIVILEGES;
+mysql>exit
+
++++++
+install client 
+$sudo apt-get install mysql-client

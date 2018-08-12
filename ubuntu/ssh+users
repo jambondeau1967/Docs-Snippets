@@ -1,0 +1,60 @@
+
++++++
+source:
+http://jonallured.com/posts/2016/09/09/my-digital-ocean-server-setup.html
++++++
+
+++++++
+assumption:
+keypair was already added for root user on remote server.
+goal:
+create another user on remote server and make sudo possible
+copy ssh keypair to homedir of this new user
+set permissions
+then
+disable rootlogin AND enable login only with authorized_keys
+++++++
+
+
+
+$ ssh root@ipaddress
+root@servername:~# adduser dev
+root@servername:~# gpasswd -a dev sudo
+
+++++++
++Copy SSH Keys to Dev User
++Since we added our SSH keys
++to the root users's authorized_keys during Droplet creation, 
++let's copy those keys over to our new dev user:
+
+root@servername:~# mkdir /home/dev/.ssh
+root@servername:~# cp .ssh/authorized_keys /home/dev/.ssh/
+root@servername:~# chown -R dev:dev /home/dev/.ssh/
+
+++++++
++disable pw logins AND key only login
+root@servername:~# nano /etc/ssh/sshd_config
+...
+PermitRootLogin no
+...
+ChallengeResponseAuthentication no
+...
+PasswordAuthentication no
+...
+UsePAM no
+...
+
+
+++++++
++restart ssh service
+root@servername:~# service ssh restart
+
+
+
+++++++ try this someday!
+add servername of remote to your ssh config:
+localmachine: ~ yourname$nano ~/.ssh/config
+
+Host servername
+  Hostname ipaddress
+  User dev
