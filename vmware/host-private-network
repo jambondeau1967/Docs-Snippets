@@ -27,6 +27,15 @@ so choose another not in that range, for example 172.16.222.100
 do not change the default!
 do not choose ip-address 1, which is reserved for vmnet1
 
+adjust:
+/Library/Preferences/VMware\ Fusion/vmnet1/dhcpd.conf
+example:
+host windows-10x64 {
+    hardware ethernet 00:50:56:2B:31:19;
+    fixed-address 192.168.7.100;
+    option domain-name-servers 8.8.8.8, 8.8.4.4;
+}
+
 reconfigure the DHCP server VMware:
 mac$ sudo /Applications/VMware\ Fusion.app/Contents/Library/vmnet-cli --configure
 stop server:
