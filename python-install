@@ -1,13 +1,28 @@
 
-1. install git
+-. install git
 sudo apt install git
 
-2. check python:
+-. check python:
 ubuntu 18.04.1 got default python 3.6.7:
 ~$python3 -V
 Python 3.6.7
 
-3. install venv:
+-.install python3 mysql stuff:
+sudo apt-get install python3.6-dev libmysqlclient-dev
+
+-. install venv:
 sudo apt install -y python3-venv
 
-4. git clone?
+mkdir Projects
+cd Projects
+
+-. git clone
+git clone...
+
+cd monkeybusiness/
+
+python3 -m venv venv
+
+source venv/bin/activate
+
+pip3 install -r pip-requirements.txt
