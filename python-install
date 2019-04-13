@@ -1,0 +1,13 @@
+
+1. install git
+sudo apt install git
+
+2. check python:
+ubuntu 18.04.1 got default python 3.6.7:
+~$python3 -V
+Python 3.6.7
+
+3. install venv:
+sudo apt install -y python3-venv
+
+4. git clone?
