@@ -2,6 +2,10 @@
 -. install git
 sudo apt install git
 
+-. mysql install, not config
+sudo apt install mysql-server
+sudo mysql_secure_installation
+
 -. check python:
 ubuntu 18.04.1 got default python 3.6.7:
 ~$python3 -V
