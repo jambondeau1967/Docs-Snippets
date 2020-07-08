@@ -42,3 +42,6 @@ yourhost:~ yourname$ssh-add -K ~/.ssh/id_rsa
 + copy public key content to clipboard:
 yourhost:~ yourname$pbcopy .ssh/id_rsa.pub
 
+
++ copy pub key to remote host:
+ssh-copy-id -i .ssh/id_rsa.pub user@aaa.bbb.ccc.ddd
